@@ -87,9 +87,9 @@ class AssetManager {
 
     pauseAsset(path) {
         let audio = this.cache[path];
-         if(!audio.paused){
-             audio.pause();
-         }
+        if(!audio.paused){
+            audio.pause();
+        }
     };
 
     muteAudio(mute) {

@@ -38,6 +38,8 @@ ASSET_MANAGER.queueDownload("./audio/gokujump.mp3");
 ASSET_MANAGER.queueDownload("./audio/gokuaura.mp3");
 ASSET_MANAGER.queueDownload("./audio/gokukiblast.mp3");
 ASSET_MANAGER.queueDownload("./audio/gokukame.mp3");
+ASSET_MANAGER.queueDownload("./audio/gokubestkame.mp3");
+ASSET_MANAGER.queueDownload("./audio/gokuNO.mp3");
 ASSET_MANAGER.queueDownload("./audio/gokukamevoice.mp3");
 ASSET_MANAGER.queueDownload("./audio/KarateSoundEffect.mp3");
 ASSET_MANAGER.queueDownload("./audio/CatMeow.mp3");
