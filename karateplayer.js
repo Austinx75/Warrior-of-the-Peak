@@ -308,13 +308,11 @@ class KaratePlayer{
         this.game.entities.forEach(function (entity) {
                 if (that !== entity && entity.BB && that.BB.collide(entity.BB)) {
                     if((entity instanceof KaratePlayerCPU || entity instanceof CatPlayerCPU || entity instanceof ChunLiCPU ||
-                        entity instanceof BillyLeeCPU || entity instanceof GokuCPU)/* && that.lastBB.right >= entity.BB.left*/){                            
-                            if(that.state === that.STATE.PUNCH/* && !opponentBlock*/){
+                        entity instanceof BillyLeeCPU || entity instanceof GokuCPU)){                            
+                            if(that.state === that.STATE.PUNCH){
                                 opponentHitPoints -= that.damage;
-                                //console.log("Opponent Health: " + opponentHitPoints);
-                            } else if(that.state === that.STATE.KICK/* && !opponentBlock*/){
+                            } else if(that.state === that.STATE.KICK){
                                 opponentHitPoints -= that.damage;
-                                //console.log("Opponent Health: " + opponentHitPoints);
                             }  
                             that.updateBB();
                         }

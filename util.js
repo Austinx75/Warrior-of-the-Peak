@@ -33,7 +33,3 @@ const PARAMS = {
     BLOCKWIDTH: 16
 }
 // add global parameters here
-
-//var params = {
-// 
-//};

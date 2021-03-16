@@ -72,7 +72,6 @@ class Propeller{
         } else if (this.state === this.STATE.ACTIVE){
             if(this.y <=110){
                 this.state = this.STATE.IDLE;
-                //this.velocity.y += this.fallAcc * TICK;
             }
         }
 
@@ -122,7 +121,6 @@ class Ocean{
 class Sky{
     constructor(game, x, y){
         Object.assign(this, {game,x,y});
-  
         this.spritesheet = ASSET_MANAGER.getAsset("./sprites/sky.png");
         this.BB = new BoundingBox(this.x, this.y, 1024, 463);
         

@@ -145,13 +145,12 @@ class SceneManager{
                 case this.LevelChoice.LEVEL[0]:
                     this.loadLevel1();
                     break;
-                    //Jungle
+                //Jungle
                 case this.LevelChoice.LEVEL[1]:
                     this.loadLevel2();
                     break;
                 //Oil Rig
                 case this.LevelChoice.LEVEL[2]:
-                    //this.title = false;
                     this.loadlevel3();
                     break;
             }
@@ -279,14 +278,12 @@ class SceneManager{
                 this.pclickX = this.game.click.x;
                 this.pclickY = this.game.click.y;
                 this.PlayersChoice.PLAYER = this.Players.CHARACTERS[2]; 
-               // ASSET_MANAGER.pauseBackgroundMusic();
             } else if(((this.game.click.y >= 550-12) && (this.game.click.y <= 550 +3) && (this.game.click.x > 0) && (this.game.click.x < this.Players.CHARACTERS[3].length * 12))){
                 ASSET_MANAGER.pauseBackgroundMusic();
                 this.pclickX = this.game.click.x;
                 this.pclickY = this.game.click.y;
                 this.PlayersChoice.PLAYER = this.Players.CHARACTERS[3];
                 ASSET_MANAGER.playAsset("./music/ChunLi.mp3"); 
-               // ASSET_MANAGER.pauseBackgroundMusic();
             } else if(((this.game.click.y >= 600-12) && (this.game.click.y <= 600 +3) && (this.game.click.x > 0) && (this.game.click.x < this.Players.CHARACTERS[4].length * 12))){
                 ASSET_MANAGER.pauseBackgroundMusic();
                 this.pclickX = this.game.click.x;
@@ -302,38 +299,26 @@ class SceneManager{
             }
 
             if(((this.game.click.y >= 400-12) && (this.game.click.y <= 400 +3) && (this.game.click.x > 400) && (this.game.click.x < 400 + this.Players.CHARACTERS[0].length * 12))){
-                // ASSET_MANAGER.pauseBackgroundMusic();
-                // ASSET_MANAGER.playAsset("./audio/KarateSoundEffect.mp3");
                 this.oclickX = this.game.click.x;
                 this.oclickY = this.game.click.y;
                 this.PlayersChoice.OPPONENT = this.Players.CHARACTERS[0];  
             } else if(((this.game.click.y >= 450-12) && (this.game.click.y <= 450 +3) && (this.game.click.x > 400) && (this.game.click.x < 400 + this.Players.CHARACTERS[1].length * 12))){
-                // ASSET_MANAGER.pauseBackgroundMusic();
-                // ASSET_MANAGER.playAsset("./audio/KarateSoundEffect.mp3");
                 this.oclickX = this.game.click.x;
                 this.oclickY = this.game.click.y;
                 this.PlayersChoice.OPPONENT = this.Players.CHARACTERS[1]; 
             } else if(((this.game.click.y >= 500-12) && (this.game.click.y <= 500 +3) && (this.game.click.x > 400) && (this.game.click.x < 400 + this.Players.CHARACTERS[2].length * 12))){
-                // ASSET_MANAGER.pauseBackgroundMusic();
-                // ASSET_MANAGER.playAsset("./audio/CatMeow.mp3");
                 this.oclickX = this.game.click.x;
                 this.oclickY = this.game.click.y;
                 this.PlayersChoice.OPPONENT = this.Players.CHARACTERS[2]; 
             } else if(((this.game.click.y >= 550-12) && (this.game.click.y <= 550 +3) && (this.game.click.x > 400) && (this.game.click.x < 400 + this.Players.CHARACTERS[3].length * 12))){
-                // ASSET_MANAGER.pauseBackgroundMusic();
-                // ASSET_MANAGER.playAsset("./music/ChunLi.mp3");
                 this.oclickX = this.game.click.x;
                 this.oclickY = this.game.click.y;
                 this.PlayersChoice.OPPONENT = this.Players.CHARACTERS[3]; 
             } else if(((this.game.click.y >= 600-12) && (this.game.click.y <= 600 +3) && (this.game.click.x > 400) && (this.game.click.x < 400 + this.Players.CHARACTERS[4].length * 12))){
-                // ASSET_MANAGER.pauseBackgroundMusic();
-                // ASSET_MANAGER.playAsset("./music/Damn.mp4");
                 this.oclickX = this.game.click.x;
                 this.oclickY = this.game.click.y;
                 this.PlayersChoice.OPPONENT = this.Players.CHARACTERS[4]; 
             } else if(((this.game.click.y >= 650-12) && (this.game.click.y <= 650 +3) && (this.game.click.x > 400) && (this.game.click.x < 400 + this.Players.CHARACTERS[4].length * 12))){
-                // ASSET_MANAGER.pauseBackgroundMusic();
-                // ASSET_MANAGER.playAsset("./music/gokutheme.mp3");
                 this.oclickX = this.game.click.x;
                 this.oclickY = this.game.click.y;
                 this.PlayersChoice.OPPONENT = this.Players.CHARACTERS[5];
@@ -387,7 +372,6 @@ class SceneManager{
             this.animations[4].drawFrame(this.game.clockTick, ctx, 685, 200, 1.55);
             this.animations[5].drawFrame(this.game.clockTick, ctx, 835, 200, 3.5);
             
-            //ctx.font = '20px "Press Start 2P"';
             ctx.fillStyle = rgb(183, 3, 3);
             ctx.fillText("---Players---", 0, 350);
             ctx.strokeText("---Players---", 0, 350);

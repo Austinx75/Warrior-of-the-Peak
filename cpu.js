@@ -37,7 +37,6 @@ class KaratePlayerCPU extends KaratePlayer{
     };
     updateBBCPU(){
         this.lastBB = this.BB;
-        //if(this.CPUSTATE.TRAVEL){
             if(this.state === this.STATE.IDLE && this.facing === this.FACING.RIGHT){
                 this.BB = new BoundingBox(this.x, this.y, KPstate.RIDLE[0].w * PARAMS.SCALE, KPstate.RIDLE[0].h * PARAMS.SCALE);
             } else if(this.state === this.STATE.IDLE && this.facing === this.FACING.LEFT){
@@ -170,8 +169,6 @@ class KaratePlayerCPU extends KaratePlayer{
                                 that.travelInit();
                                 that.x = entity.BB.right;
                             } else {
-                                // if(that.CPUSTATE.TRAVEL) that.x = entity.BB.right;
-                                // if(that.CPUSTATE.ATTACK)that.x = entity.BB.right-20;//-20
                                 that.x = entity.BB.right-20;
                                 that.CPUSTATE.ATTACK = true;
                                 if(that.CPUSTATE.ATTACK === true){
@@ -197,8 +194,6 @@ class KaratePlayerCPU extends KaratePlayer{
                                 if(that.state === that.STATE.WALK)that.x = entity.BB.left - KPstate.RWALK[0].w * PARAMS.SCALE;
                                 if(that.state === that.STATE.ROLL) that.x = entity.BB.left - KPstate.RROLL[0].w * PARAMS.SCALE;
                             } else {
-                                // if(that.state === that.STATE.KICK) that.x = entity.BB.left - KPstate.RKICK[0].w * PARAMS.SCALE-20;//-20
-                                // if(that.state === that.STATE.PUNCH) that.x = entity.BB.left - KPstate.RPUNCH[0].w * PARAMS.SCALE-20;   
                                 that.CPUSTATE.ATTACK = true;
                                 if(that.CPUSTATE.ATTACK){
                                         if(that.attack === 0){
@@ -896,7 +891,6 @@ class ChunLiCPU extends ChunLi{
                 if (that !== entity && entity.BB && that.BB.collide(entity.BB)) {
                     if(that.velocity.y > 0){
                         if((entity instanceof BackGround || entity instanceof BackScene || entity instanceof Sky) && (that.lastBB.bottom) >= entity.BB.bottom){
-                            //console.log("IS she colliding with ground?");
                             that.CPUSTATE.AIR = false;
                         }
                         if((entity instanceof Platform || entity instanceof Propeller) && that.lastBB.bottom >= entity.BB.top){
@@ -913,12 +907,12 @@ class ChunLiCPU extends ChunLi{
                                 if(that.attack === 0){
                                     that.state = 3;
                                     if(!that.other.block){
-                                        that.other.hitPoints -= .04;
+                                        that.other.hitPoints -= .06;
                                     }
                                 } else if(that.attack === 1){
                                     that.state = 6;
                                     if(!that.other.block){
-                                        that.other.hitPoints -= .04;
+                                        that.other.hitPoints -= .06;
                                     }
                                 }
                                 }
@@ -938,12 +932,12 @@ class ChunLiCPU extends ChunLi{
                                 if(that.attack === 0){
                                     that.state = 3;
                                     if(!that.other.block){
-                                        that.other.hitPoints -= .04;
+                                        that.other.hitPoints -= .06;
                                     }
                                 } else if(that.attack === 1){
                                     that.state = 4;
                                     if(!that.other.block){
-                                        that.other.hitPoints -= .04;
+                                        that.other.hitPoints -= .06;
                                     }
                                 }
                             }
@@ -1006,20 +1000,8 @@ class ChunLiCPU extends ChunLi{
                             that.updateBB();                         
                         }
 
-                           //Side Logic - Level2/3  - Platform/Propeller
-                         /*  if((entity instanceof Platform || entity instanceof Propeller) && that.BB.collide(entity.topBB) && that.BB.collide(entity.bottomBB)){
-                                if (that.BB.collide(entity.leftBB)) {
-                                    if(that.state === 2) that.x = entity.BB.left - that.jump[that.animations[2][0].currentFrame()].w * PARAMS.CHUNLI; 
-                                that.velocity.x = 0;                      
-                            } else {
-                                if(that.state === 2) that.x = entity.BB.right;  
-                                that.velocity.x = 0;
-                            }
-                            that.updateBB();
-                    } */
-
                          //Walking to Right Logic - any level
-                         if((entity instanceof BackScene || entity instanceof BackGround || entity instanceof Sky) && that.lastBB.right >= entity.BB.right){
+                        if((entity instanceof BackScene || entity instanceof BackGround || entity instanceof Sky) && that.lastBB.right >= entity.BB.right){
                                 if(that.state === 0) that.x = entity.BB.right - that.idle[that.animations[0][0].currentFrame()].w * PARAMS.CHUNLI;
                                 else if(that.state === 1) that.x = entity.BB.right - that.walk[that.animations[1][0].currentFrame()].w * PARAMS.CHUNLI;
                                 else if(that.state === 2) that.x = entity.BB.right - that.jump[that.animations[2][0].currentFrame()].w * PARAMS.CHUNLI;
@@ -1032,26 +1014,13 @@ class ChunLiCPU extends ChunLi{
                                 else if(that.state === 9) that.x = entity.BB.right - that.duck[that.animations[9][0].currentFrame()].w * PARAMS.CHUNLI;
                                 else if(that.state === 10) that.x = entity.BB.right  - that.blocked[that.animations[10][0].currentFrame()].w * PARAMS.CHUNLI;
                             
-                          //  if(that.state === 2) that.state = 0;    
                             that.velocity.x = 0;
                             that.updateBB(); 
 
                         }
                         //Walking to Left Logic - any level
-                         if((entity instanceof BackScene || entity instanceof BackGround || entity instanceof Sky) && that.lastBB.left <= entity.BB.left){
-                             that.x = entity.BB.left;
-                         /*   if(that.state === 0) that.x = entity.BB.left;
-                            else if(that.state === 1) that.x = entity.BB.left;
-                            else if(that.state === 2) that.x = entity.BB.left;
-                            else if(that.state === 3) that.x = entity.BB.left;  
-                            else if(that.state === 4) that.x = entity.BB.left;
-                            else if(that.state === 5) that.x = entity.BB.left;
-                            else if(that.state === 6) that.x = entity.BB.left;
-                            else if(that.state === 7) that.x = entity.BB.left;  
-                            else if(that.state === 8) that.x = entity.BB.left; 
-                            else if(that.state === 9) that.x = entity.BB.left;
-                            else if(that.state === 10) that.x = entity.BB.left;
-                          //  if(that.state === 2) that.state = 0;    */
+                        if((entity instanceof BackScene || entity instanceof BackGround || entity instanceof Sky) && that.lastBB.left <= entity.BB.left){
+                            that.x = entity.BB.left;
                             that.velocity.x = 0;
                             that.updateBB(); 
                         }
@@ -1068,8 +1037,8 @@ class ChunLiCPU extends ChunLi{
                             }
                             //jumping logic - level 2 platform
                             if((entity instanceof Platform) && that.lastBB.top >= entity.BB.bottom){
-                                if(that.state === 2) that.y = entity.BB.bottom;// + that.jump[that.animations[2][0].currentFrame()].h * PARAMS.CHUNLI;
-                                else if(that.state === 6) that.y = entity.BB.bottom;// + that.sKick[that.animations[6][0].currentFrame()].h * PARAMS.CHUNLI;
+                                if(that.state === 2) that.y = entity.BB.bottom;
+                                else if(that.state === 6) that.y = entity.BB.bottom;
                                 else if(that.state === 5) that.y = entity.BB.bottom;
                                 else if(that.state === 7) that.y = entity.BB.bottom;                               
                                 that.velocity.y = 0;
@@ -1078,8 +1047,8 @@ class ChunLiCPU extends ChunLi{
 
                             // jumping on propeller oil rig
                             if((entity instanceof Propeller) &&  that.lastBB.top >= entity.BB.bottom){
-                                if(that.state === 2) that.y = entity.BB.bottom;// + that.jump[that.animations[2][0].currentFrame()].h * PARAMS.CHUNLI;
-                                else if(that.state === 6) that.y = entity.BB.bottom; // + that.sKick[that.animations[6][0].currentFrame()].h * PARAMS.CHUNLI;
+                                if(that.state === 2) that.y = entity.BB.bottom;
+                                else if(that.state === 6) that.y = entity.BB.bottom;
                                 that.hitPoints -= 2;
                                 that.velocity.y = 0;
                                 that.updateBB(); 
@@ -1098,7 +1067,6 @@ class ChunLiCPU extends ChunLi{
                                 else if(that.state === 8) that.x = entity.BB.right - that.gHit[that.animations[8][0].currentFrame()].w * PARAMS.CHUNLI; 
                                 else if(that.state === 9) that.x = entity.BB.right - that.duck[that.animations[9][0].currentFrame()].w * PARAMS.CHUNLI;
                                 else if(that.state === 10) that.x = entity.BB.right  - that.blocked[that.animations[10][0].currentFrame()].w * PARAMS.CHUNLI;
-                               // if(that.state === 2) that.x = entity.BB.right - that.jump[that.animations[2][0].currentFrame()].w * PARAMS.CHUNLI;
                                 that.velocity.y = 0;
                                 that.updateBB();
                         }
@@ -1111,7 +1079,6 @@ class ChunLiCPU extends ChunLi{
                                 that.velocity.y = 0;
                                 that.updateBB();
                         }
-                           
                     } 
                 }
             })
@@ -1167,10 +1134,8 @@ class ChunLiCPU extends ChunLi{
         this.healthbar.draw(ctx);
         ctx.restore();
         this.healthbar.draw(ctx);
-       
 
     } 
-       // this.animations[this.state][this.facing].drawFrame(this.game.clockTick,ctx, this.x, this.y, PARAMS.CHUNLI);
     };
     VisCircle() {
         var dx = this.cX - this.other.cX;
@@ -1418,25 +1383,12 @@ class BillyLeeCPU extends BillyLee{
                           else if(that.state === 8) that.y = entity.BB.top - that.jump[that.animations[8][0].currentFrame()].h * PARAMS.BL; 
                           else if(that.state === 9) that.y = entity.BB.top - that.duck[that.animations[9][0].currentFrame()].h * PARAMS.BL;
                           else if(that.state === 10) that.y = entity.BB.top - that.blocked[that.animations[10][0].currentFrame()].h * PARAMS.BL;
-                      // if(that.state === 8) that.state = 0;           
                         that.velocity.y = 0;
                         that.updateBB();                        
                         }
 
-                           //Side Logic - Level2/3  - Platform/Propeller
-                         /*  if((entity instanceof Platform || entity instanceof Propeller) && that.BB.collide(entity.topBB) && that.BB.collide(entity.bottomBB)){
-                                if (that.BB.collide(entity.leftBB)) {
-                                    if(that.state === 2) that.x = entity.BB.left - that.jump[that.animations[2][0].currentFrame()].w * PARAMS.CHUNLI; 
-                                that.velocity.x = 0;                      
-                            } else {
-                                if(that.state === 2) that.x = entity.BB.right;  
-                                that.velocity.x = 0;
-                            }
-                            that.updateBB();
-                    } */
-
                          //Walking to Right Logic - any level
-                         if((entity instanceof BackScene || entity instanceof BackGround || entity instanceof Sky) && that.lastBB.right >= entity.BB.right){
+                        if((entity instanceof BackScene || entity instanceof BackGround || entity instanceof Sky) && that.lastBB.right >= entity.BB.right){
                             if(that.state === 0) that.x = entity.BB.right - that.idle[that.animations[0][0].currentFrame()].w * PARAMS.BL;
                             else if(that.state === 1) that.x = entity.BB.right - that.walk[that.animations[1][0].currentFrame()].w * PARAMS.BL;
                             else if(that.state === 2) that.x = entity.BB.right - that.rPunch[that.animations[2][0].currentFrame()].w * PARAMS.BL;
@@ -1448,26 +1400,13 @@ class BillyLeeCPU extends BillyLee{
                             else if(that.state === 8) that.x = entity.BB.right - that.jump[that.animations[8][0].currentFrame()].w * PARAMS.BL; 
                             else if(that.state === 9) that.x = entity.BB.right - that.duck[that.animations[9][0].currentFrame()].w * PARAMS.BL;
                             else if(that.state === 10) that.x = entity.BB.right - that.duck[that.animations[9][0].currentFrame()].w * PARAMS.BL;
-                        //  if(that.state === 8) that.state = 0;           
                             that.velocity.x = 0;
                             that.updateBB(); 
 
                         }
                         //Walking to Left Logic - any level
-                         if((entity instanceof BackScene || entity instanceof BackGround || entity instanceof Sky) && that.lastBB.left <= entity.BB.left){
-                             that.x = entity.BB.left;
-                         /*   if(that.state === 0) that.x = entity.BB.left;
-                            else if(that.state === 1) that.x = entity.BB.left;
-                            else if(that.state === 2) that.x = entity.BB.left;
-                            else if(that.state === 3) that.x = entity.BB.left;  
-                            else if(that.state === 4) that.x = entity.BB.left;
-                            else if(that.state === 5) that.x = entity.BB.left;
-                            else if(that.state === 6) that.x = entity.BB.left;
-                            else if(that.state === 7) that.x = entity.BB.left;  
-                            else if(that.state === 8) that.x = entity.BB.left; 
-                            else if(that.state === 9) that.x = entity.BB.left;
-                            else if(that.state === 10) that.x = entity.BB.left;
-                          //  if(that.state === 2) that.state = 0;    */
+                        if((entity instanceof BackScene || entity instanceof BackGround || entity instanceof Sky) && that.lastBB.left <= entity.BB.left){
+                            that.x = entity.BB.left;
                             that.velocity.x = 0;
                             that.updateBB(); 
                         }
@@ -1483,14 +1422,6 @@ class BillyLeeCPU extends BillyLee{
                                 that.updateBB();
                             }
                             //jumping logic - level 2 platform
-                          /*  if((entity instanceof Platform) && that.lastBB.top >= entity.BB.bottom){
-                                if(that.state === 8) that.y = entity.BB.bottom;// + that.jump[that.animations[2][0].currentFrame()].h * PARAMS.CHUNLI;                              
-                                else if (that.state === 3) that.y = entity.BB.bottom;
-                                else if (that.state === 5) that.y = entity.BB.bottom;
-                                that.velocity.y = 0;
-                                that.updateBB();
-                            } */
-
                             if((entity instanceof Platform) && that.lastBB.top >= entity.BB.bottom){
                                 if(that.CPUSTATE.AIR) that.y = entity.BB.bottom; /*+ that.jump[that.animations[8][0].currentFrame()].h * PARAMS.BL;*/
                                 else if(that.state === 5) that.y = entity.BB.bottom; /*+ that.kick[that.animations[5][0].currentFrame()].h * PARAMS.BL;*/
@@ -1499,14 +1430,6 @@ class BillyLeeCPU extends BillyLee{
                             }
 
                             // jumping on propeller oil rig
-                           /* if((entity instanceof Propeller) &&  that.lastBB.top >= entity.BB.bottom){
-                                if(that.state === 8) that.y = entity.BB.bottom;// + that.jump[that.animations[2][0].currentFrame()].h * PARAMS.CHUNLI;
-                                else if(that.state === 6) that.y = entity.BB.bottom; // + that.sKick[that.animations[6][0].currentFrame()].h * PARAMS.CHUNLI;
-                                that.hitPoints -= 2;
-                                that.velocity.y = 0;
-                                that.updateBB(); 
-                            }*/
-
                             if((entity instanceof Propeller) &&  that.lastBB.top >= entity.BB.bottom){
                                 if(that.CPUSTATE.AIR) that.y = entity.BB.bottom;
                                 else if(that.state === 5) that.y = entity.BB.bottom;
@@ -1592,10 +1515,8 @@ class BillyLeeCPU extends BillyLee{
         this.healthbar.draw(ctx);
         ctx.restore();
         this.healthbar.draw(ctx);
-       
 
     } 
-       // this.animations[this.state][this.facing].drawFrame(this.game.clockTick,ctx, this.x, this.y, PARAMS.CHUNLI);
     };
     VisCircle() {
         var dx = this.cX - this.other.cX;

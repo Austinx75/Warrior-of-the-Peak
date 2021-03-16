@@ -4,7 +4,6 @@ class catplayer{
 
         this.name = theName;
         this.CPU = false;
-       
         this.maxHitPoints = 100;
         this.hitPoints = 100;
         this.deathCount = deathCount;
@@ -83,7 +82,6 @@ class catplayer{
                 break;
         }
     };
-   
 
     loadAnimations(){
         for(var i = 0; i < 8; i++){ //7states - idle, walking, running, jumping, punching, kicking, block, dead 
@@ -145,7 +143,6 @@ class catplayer{
         const FALL_WALK = 1;
         const JUMPING = 500;
         const STOP_FALL = 400;
-        //const STOP_FALL_A = 90;
         const TICK = this.game.clockTick;
         this.block = false;
         this.changeElapsed += TICK;
@@ -160,14 +157,12 @@ class catplayer{
                 this.velocity.x = WALK;
                 this.state = 1;
                 this.facing = 0;
-                //this.x += 5;
             }
             //left
             else if(this.game.A){
                 this.velocity.x = -WALK;
                 this.facing = 1;
                 this.state = 1;
-                //this.x -=5;
             }else{
                 this.velocity.x = 0;
                 this.state = 0;
@@ -181,23 +176,10 @@ class catplayer{
             //punch
             if(this.game.E){
                 this.state = 4;
-                // if(this.state === 0){
-                // this.state = 4;
-                
-                // }else{
-                //     this.state = 4;
-                // }
-                //this.game.E = false;
             }
                 //kick
             if(this.game.R){
                 this.state = 5;
-                // if(this.state === 0){
-                // this.state = 5;
-                // }else{
-                //     this.state = 5;
-                // }
-             //this.game.R = false;
             }
 
             //gravity
@@ -210,7 +192,6 @@ class catplayer{
                 this.fallAcc = STOP_FALL;
             }
 
-           
             //air physics
         } else if(this.state === 6 && this.state !== 7){
             this.velocity.y += this.fallAcc * TICK * PARAMS.SCALE;
@@ -309,7 +290,6 @@ class catplayer{
                         else if(that.state === 3) that.y = entity.BB.top - ((that.height2 - 3) * PARAMS.SCALE);
                         else if(that.state === 4) that.y = entity.BB.top - ((that.height2 - 3) * PARAMS.SCALE);  
                         else if(that.state === 5) that.y = entity.BB.top - ((that.height2 - 3) * PARAMS.SCALE);      
-             
                         that.velocity.y = 0;
                         that.updateBB();                         
                     }
@@ -366,14 +346,9 @@ class catplayer{
                 
             }
         });
-
-        // if(!this.game.D && !this.game.A && !this.game.W && !this.game.S && !this.game.E && !this.game.R){
-        //     this.state = 0;
-        // }
         
     };
     
-   
     draw(ctx){
             if(PARAMS.DEBUG){
                 //Visual Circle

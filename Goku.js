@@ -406,13 +406,13 @@ class Goku{
                 if (that !== entity && entity.BB && that.BB.collide(entity.BB)) {
                     if((entity instanceof KaratePlayerCPU || entity instanceof CatPlayerCPU || entity instanceof ChunLiCPU || entity instanceof BillyLeeCPU 
                         || entity instanceof GokuCPU)){
-                            if(that.state === that.STATE.PUNCH/* && !opponentBlock*/){
+                            if(that.state === that.STATE.PUNCH){
                                 opponentHitPoints -= that.damage;
-                            } else if(that.state === that.STATE.KICK/* && !opponentBlock*/){
+                            } else if(that.state === that.STATE.KICK){
                                 opponentHitPoints -= that.damage;
-                            } else if(that.state === that.STATE.BLAST/* && !opponentBlock*/){
+                            } else if(that.state === that.STATE.BLAST){
                                 opponentHitPoints -= that.damage * 1.05;
-                            } else if(that.state === that.STATE.KAME/* && !opponentBlock*/){
+                            } else if(that.state === that.STATE.KAME){
                                 if(that.time >= 3){
                                 opponentHitPoints -= that.damage * 2.5;
                                 } 
@@ -531,6 +531,7 @@ class Goku{
                             else if(that.state === that.STATE.BLAST) that.x = entity.BB.right - GokuState.RBLAST[0].w * PARAMS.SCALE;
                             else if(that.state === that.STATE.DUCK) that.x = entity.BB.right - GokuState.RDUCK[0].w * PARAMS.SCALE;
                             else if(that.state === that.STATE.KAME) that.x = entity.BB.right - GokuState.RKAME[0].w * PARAMS.SCALE;
+                            else if(that.state === that.STATE.KAMECHARGE) that.x = entity.BB.right - GokuState.RKAMECHARGE[0].w * PARAMS.SCALE;
                             that.velocity.x = 0;
                             that.updateBB();
                         }
@@ -541,9 +542,10 @@ class Goku{
                             else if(that.state === that.STATE.KICK) that.x = entity.BB.left;
                             else if(that.state === that.STATE.POWER) that.x = entity.BB.left;     
                             else if(that.state === that.STATE.BLOCK) that.x = entity.BB.left;           
-                            else if(that.state === that.STATE.BLAST) that.x = entity.BB.left;
+                            else if(that.state === that.STATE.BLAST) that.x = entity.BB.left + 185;
                             else if(that.state === that.STATE.DUCK) that.x = entity.BB.left;
-                            else if(that.state === that.STATE.KAME) that.x = entity.BB.left;
+                            else if(that.state === that.STATE.KAMECHARGE) that.x = entity.BB.left;
+                            else if(that.state === that.STATE.KAME) that.x = entity.BB.left + 230;
                             that.velocity.x = 0;
                             that.updateBB();
                         }
