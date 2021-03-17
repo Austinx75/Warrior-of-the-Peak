@@ -1167,7 +1167,7 @@ class ChunLiCPU extends ChunLi{
         this.healthbar.draw(ctx);
         ctx.restore();
         this.healthbar.draw(ctx);
-       
+    
 
     } 
        // this.animations[this.state][this.facing].drawFrame(this.game.clockTick,ctx, this.x, this.y, PARAMS.CHUNLI);
