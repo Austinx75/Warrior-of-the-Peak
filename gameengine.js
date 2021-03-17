@@ -54,25 +54,20 @@ class GameEngine {
             return { x: x, y: y };
         }
 
-             this.ctx.canvas.addEventListener("mousemove", function (e) {
-            //console.log(getXandY(e));
+            this.ctx.canvas.addEventListener("mousemove", function (e) {
             that.mouse = getXandY(e);
         }, false);
 
         this.ctx.canvas.addEventListener("click", function (e) {
-            //console.log(getXandY(e));
             that.click = getXandY(e);
         }, false);
 
         this.ctx.canvas.addEventListener("wheel", function (e) {
-            //console.log(getXandY(e));
             that.wheel = e;
-            //       console.log(e.wheelDelta);
             e.preventDefault();
         }, false);
 
         this.ctx.canvas.addEventListener("contextmenu", function (e) {
-            //console.log(getXandY(e));
             that.rightclick = getXandY(e);
             e.preventDefault();
         }, false);
@@ -180,36 +175,6 @@ class GameEngine {
                     break;
             }
         }, false);
-
-   /*     var getXandY = function (e) {
-            var x = e.clientX - that.ctx.canvas.getBoundingClientRect().left;
-            var y = e.clientY - that.ctx.canvas.getBoundingClientRect().top;
-
-            return { x: x, y: y };
-        }*/
-
-   /*     this.ctx.canvas.addEventListener("mousemove", function (e) {
-            //console.log(getXandY(e));
-            that.mouse = getXandY(e);
-        }, false);
-
-        this.ctx.canvas.addEventListener("click", function (e) {
-            //console.log(getXandY(e));
-            that.click = getXandY(e);
-        }, false);
-
-        this.ctx.canvas.addEventListener("wheel", function (e) {
-            //console.log(getXandY(e));
-            that.wheel = e;
-            //       console.log(e.wheelDelta);
-            e.preventDefault();
-        }, false);
-
-        this.ctx.canvas.addEventListener("contextmenu", function (e) {
-            //console.log(getXandY(e));
-            that.rightclick = getXandY(e);
-            e.preventDefault();
-        }, false); */
     };
 
     addEntity(entity) {

@@ -19,19 +19,13 @@ class Animator2 {
         }
 
         let frame = this.currentFrame();
-        if (this.reverse) frame = this.frameCount - frame - 1;
-       
+        if (this.reverse) frame = this.frameCount - frame - 1; 
         ctx.drawImage(this.spritesheet,
             this.array[frame].x, this.array[frame].y, //source from sheet
             this.array[frame].w, this.array[frame].h,
             x, y,
             this.array[frame].w * scale,
             this.array[frame].h * scale);
-
-       /* if (PARAMS.DEBUG) {
-            ctx.strokeStyle = 'Green';
-            ctx.strokeRect(x, y, this.width * scale, this.height * scale);
-        } */
     };
 
     currentFrame() {

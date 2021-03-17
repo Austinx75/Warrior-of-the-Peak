@@ -1,10 +1,6 @@
 class BillyLee {
     constructor(game, x, y, theName, roundCount, map, deathCount, opponent, cpuDeathCount) {
         Object.assign(this, { game, x, y, theName, roundCount, map, deathCount, opponent, cpuDeathCount });
-  
-      //  this.game.BillyLee = this;
-
-      //  this.name = "Billy Lee";
 
         //Character Details for HUD and game
         this.name = this.theName;
@@ -26,21 +22,9 @@ class BillyLee {
         //this.AtkRadius = 35;
         this.cX = 0, this.xY = 0;
 
-        //Only for block
-     /*   this.STATE = {
-            BLOCK: 10
-        };
-
-        //only for block
-        this.FACING = {
-            RIGHT:  0,
-            LEFT: 1
-        }; */
-  
-  
         // spritesheet
         this.spritesheet = ASSET_MANAGER.getAsset("./sprites/BillyLee.png")
-  
+
         // DDPlayer state variables
         this.state = 0; // 0 = idle, 1 = walking, 2 = right punch, 3 = left punch, 4 = super punch, 5 = kick, 6 = super kick, 7 = get hit, 8 = jump, 9 = duck 
         this.facing = 0; // 0 = right, 1 = left
@@ -329,23 +313,18 @@ class BillyLee {
         this.game.entities.forEach(function (entity) {
                 if (that !== entity && entity.BB && that.BB.collide(entity.BB)) {
                     if((entity instanceof KaratePlayerCPU || entity instanceof CatPlayerCPU || entity instanceof ChunLiCPU || entity instanceof BillyLeeCPU)){
-                            if(that.state === 3/* && !opponentBlock*/){
-                                opponentHitPoints -= .05;
-                            } else if(that.state === 5/* && !opponentBlock*/){
-                                opponentHitPoints -= .05;
+                            if(that.state === 3){
+                                opponentHitPoints -= .06;
+                            } else if(that.state === 5){
+                                opponentHitPoints -= .06;
                             } else if(that.state === 4){
-                                opponentHitPoints -= .1;
+                                opponentHitPoints -= .08;
                             } else if(that.state === 6){
-                                opponentHitPoints -= .15;
+                                opponentHitPoints -= .08;
                             }
                         }
             }
         });
-        //updating
-      //  this.x += this.velocity.x * TICK;
-      //  this.y += this.velocity.y * TICK;
-      //  this.updateBB();
-      //  this.collisions();
 
         //updating
         this.x += this.velocity.x * TICK * PARAMS.BL;
@@ -406,9 +385,6 @@ class BillyLee {
                             that.updateBB();                         
                         }
 
-
-
-
                         //Walking to Right Logic - Level1 - Level2
                         if((entity instanceof BackScene || entity instanceof BackGround || entity instanceof Sky) && that.lastBB.right >= entity.BB.right){
                         //  if(that.state === 8) that.state = 0;
@@ -430,33 +406,10 @@ class BillyLee {
                         }
                         //Walking to Left Logic - Level1 - Level2
                         if((entity instanceof BackScene || entity instanceof BackGround || entity instanceof Sky) && that.lastBB.left <= entity.BB.left){
-                        that.x = entity.BB.left;
-                            /*  // if(that.state === 8) that.state = 0;
-                            if(that.state === 0) that.x = entity.BB.left;
-                            else if(that.state === 1) that.x = entity.BB.left;
-                            else if(that.state === 2) that.x = entity.BB.left;
-                            else if(that.state === 3) that.x = entity.BB.left;  
-                            else if(that.state === 4) that.x = entity.BB.left;
-                            else if(that.state === 5) that.x = entity.BB.left;
-                            else if(that.state === 6) that.x = entity.BB.left;
-                            else if(that.state === 7) that.x = entity.BB.left;  
-                            else if(that.state === 8) that.x = entity.BB.left; 
-                            else if(that.state === 9) that.x = entity.BB.left;
-                        // if(that.state === 8) that.state = 0;    */       
+                        that.x = entity.BB.left;     
                             that.velocity.x = 0;
                             that.updateBB();  
                         }
-
-                     /*   if((entity instanceof KaratePlayerCPU || entity instanceof CatPlayerCPU || entity instanceof ChunLiCPU || entity instanceof BillyLeeCPU) && that.lastBB.right >= entity.BB.left){
-                            if(that.state === 1) that.x = entity.BB.left - that.walk[that.animations[1][0].currentFrame()].w * PARAMS.BL;
-                            if(that.state === 5) that.x = entity.BB.left - that.kick[that.animations[6][0].currentFrame()].w * PARAMS.BL;
-                            if(that.state === 3) that.x = entity.BB.left - that.lpunch[that.animations[3][0].currentFrame()].w * PARAMS.BL;
-                            that.updateBB();
-                        }
-                        if((entity instanceof KaratePlayerCPU || entity instanceof CatPlayerCPU || entity instanceof ChunLiCPU || entity instanceof BillyLeeCPU) && that.lastBB.left <= entity.BB.right){;
-                            that.x = entity.BB.right;
-                            that.updateBB();
-                        }*/
                     }
                         
                     //Air Collisions
@@ -475,16 +428,10 @@ class BillyLee {
                                 that.velocity.y = 0;
                                 that.updateBB();
                             }
-                        /*  //Jumping & Kicking to Right - Level2 - Level1
-                            if((entity instanceof BackScene || entity instanceof BackGround) && that.lastBB.right >= entity.BB.right){
-                                if(that.state === 8) that.x = entity.BB.right - that.jump[that.animations[8][0].currentFrame()].w * PARAMS.BL;
-                                that.velocity.y = 0;
-                                that.updateBB();
-                            } */
                             // jumping on propeller oil righ
                             if((entity instanceof Propeller) &&  that.lastBB.top >= entity.BB.bottom){
-                                if(that.state === 8) that.y = entity.BB.bottom; //+ that.jump[that.animations[8][0].currentFrame()].h * PARAMS.BL;
-                                else if(that.state === 5) that.y = entity.BB.bottom;// + that.kick[that.animations[5][0].currentFrame()].h * PARAMS.BL;
+                                if(that.state === 8) that.y = entity.BB.bottom;
+                                else if(that.state === 5) that.y = entity.BB.bottom;
                                 that.hitPoints -= 2;
                                 that.velocity.y = 0;
                                 that.updateBB(); 
@@ -492,7 +439,6 @@ class BillyLee {
 
                             //Jumping & Kicking to Right - any level
                             if((entity instanceof BackScene || entity instanceof BackGround || entity instanceof Sky) && that.lastBB.right >= entity.BB.right){
-                            // if(that.state === 8) that.state = 0;
                                 if(that.state === 0) that.x = entity.BB.right - that.idle[that.animations[0][0].currentFrame()].w * PARAMS.BL;
                                 else if(that.state === 1) that.x = entity.BB.right - that.walk[that.animations[1][0].currentFrame()].w * PARAMS.BL;
                                 else if(that.state === 2) that.x = entity.BB.right - that.rPunch[that.animations[2][0].currentFrame()].w * PARAMS.BL;
@@ -503,17 +449,13 @@ class BillyLee {
                                 else if(that.state === 7) that.x = entity.BB.right - that.gHit[that.animations[7][0].currentFrame()].w * PARAMS.BL;  
                                 else if(that.state === 8) that.x = entity.BB.right - that.jump[that.animations[8][0].currentFrame()].w * PARAMS.BL; 
                                 else if(that.state === 9) that.x = entity.BB.right - that.duck[that.animations[9][0].currentFrame()].w * PARAMS.BL;
-                             //   that.velocity.y = 0;
                                 that.updateBB();
                             }
                             //Jumping & Kicking to Left - any level
                             if((entity instanceof BackScene || entity instanceof BackGround || entity instanceof Sky) && that.lastBB.left <= entity.BB.left){
                                 if(that.state === 8) that.x = entity.BB.left;
-                              //  that.velocity.y = 0;
                                 that.updateBB();
                             }
-
-
                     }
                 }
             
@@ -521,13 +463,6 @@ class BillyLee {
     };
 
     draw(ctx) {
-
-        /*
-        if(PARAMS.DEBUG){
-            ctx.strokeStyle = "Red";
-            ctx.strokeRect(this.x, this.y, this.width*3, this.height*3);
-        };
-        */
 
         if(!this.CPU){
             ctx.strokeStyle = "DarkOrange";
